@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neeraj Saraff | Data Science Portfolio</title>
+  <style>
+    /* =========================================================
+       CSS VARIABLES & THEME CONFIGURATION (High-Contrast Dark)
+       ========================================================= */
+    :root {
+      --bg-main: #0B0F19;
+      --bg-card: #161F33;
+      --bg-card-hover: #1E2B47;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --accent-cyan: #00F0FF;
+      --accent-purple: #7000FF;
+      --accent-gradient: linear-gradient(135deg, #00F0FF 0%, #7000FF 100%);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* =========================================================
+       GLOBAL RESET & BASE STYLES
+       ========================================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+
+    /* =========================================================
+       NAVIGATION BAR
+       ========================================================= */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--accent-cyan);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================================================
+       HERO SECTION WITH CSS ANIMATION
+       ========================================================= */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 10%;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      animation: pulse 2.5s infinite;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 .highlight {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 20px rgba(112, 0, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 240, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       CONTAINERS & SECTIONS
+       ========================================================= */
+    section {
+      padding: 5rem 10%;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: var(--accent-cyan);
+      bottom: -8px;
+      left: 0;
+      border-radius: 2px;
+    }
+
+    /* =========================================================
+       SKILLS GRID SECTION
+       ========================================================= */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       PROJECTS SECTION
+       ========================================================= */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(112, 0, 255, 0.2);
+    }
+
+    .project-header {
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       CONTACT SECTION
+       ========================================================= */
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* =========================================================
+       CSS KEYFRAME ANIMATIONS
+       ========================================================= */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+    }
+
+    /* =========================================================
+       RESPONSIVE DESIGN
+       ========================================================= */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero {
+        padding: 0 5%;
+      }
+      section {
+        padding: 3rem 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="logo">Neeraj Saraff</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="hero" id="about">
+    <span class="hero-badge">B.Tech Data Science Student</span>
+    <h1>Turning raw data into <br/><span class="highlight">actionable insights.</span></h1>
+    <p>
+      Hi, I'm Neeraj Saraff. I specialize in data analysis, statistical modeling, 
+      SQL query optimization, and building interactive dashboards that drive decisions.
+    </p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+    </div>
+  </header>
+
+  <!-- TECHNICAL SKILLS SECTION -->
+  <section id="skills">
+    <h2 class="section-title">Technical Expertise</h2>
+    <div class="skills-grid">
+      
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-title">Python</div>
+        <div class="skill-desc">Pandas, NumPy, Matplotlib, Seaborn for exploratory data analysis and automation.</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-title">SQL</div>
+        <div class="skill-desc">Complex joins, aggregations, window functions, CTEs, and database querying.</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-title">Data Analysis</div>
+        <div class="skill-desc">Data cleaning, hypothesis testing, statistical evaluation, and trend detection.</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📉</div>
+        <div class="skill-title">Excel</div>
+        <div class="skill-desc">Advanced formulas, Pivot Tables, VLOOKUP/XLOOKUP, and dynamic charts.</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <div class="skill-title">Tableau</div>
+        <div class="skill-desc">Interactive visual storytelling, calculations, and visual dashboard design.</div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-title">Power BI</div>
+        <div class="skill-desc">DAX modeling, automated reporting, data transformation, and ETL processes.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">E-Commerce Sales Analysis</div>
+          <div class="project-desc">
+            Cleaned and analyzed 100K+ transaction records to uncover revenue drivers, customer churn rate, and regional purchasing trends.
+          </div>
+          <div class="tech-tags">
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Power BI</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank">View Code &rarr;</a>
+          <a href="#" target="_blank">Live Dashboard &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Customer Segmentation & EDA</div>
+          <div class="project-desc">
+            Performs exploratory data analysis and RFM (Recency, Frequency, Monetary) segmentation using Python to target high-value clients.
+          </div>
+          <div class="tech-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Seaborn</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank">GitHub Repo &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Financial Performance Dashboard</div>
+          <div class="project-desc">
+            Built an interactive Tableau dashboard tracking KPI metrics, quarterly growth percentages, and budget variations for business stakeholders.
+          </div>
+          <div class="tech-tags">
+            <span class="tag">Excel</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Data Viz</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank">View Tableau Board &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="contact-card">
+      <h3>Let's Connect</h3>
+      <p>I am actively looking for Data Science & Analytics roles and internship opportunities.</p>
+      <div class="btn-group" style="justify-content: center;">
+        <a href="mailto:neerajsaraff@example.com" class="btn btn-primary">Email Me</a>
+        <a href="https://linkedin.com" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Neeraj Saraff | B.Tech Data Science</p>
+  </footer>
+
+</body>
+</html>
